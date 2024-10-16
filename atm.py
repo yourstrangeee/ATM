@@ -17,7 +17,7 @@ def check_account(email):
         cursor.execute("SELECT * FROM atm WHERE email = ?",(email,))
         acc = cursor.fetchone()
         if acc:
-            print(f"Account found! 📝\nName: {acc[1]}\nEmail: {acc[0]}\nPassword: {acc[2]}\nBalance: ₹{acc[3]}")
+            print(f"Account found! 📝\nName: {acc[1]}\nEmail: {acc[0]}\nPassword: {acc[2]}\nBalance: {acc[3]}")
         else:
             print("❌ No account found with this email.")
 def debit(email):
