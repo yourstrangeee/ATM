@@ -20,6 +20,14 @@ def check_account(email):
             print(f"Account found! 📝\nName: {acc[1]}\nEmail: {acc[0]}\nPassword: {acc[2]}\nBalance: {acc[3]}")
         else:
             print("❌ No account found with this email.")
+def delete_account(email):
+    cursor.execute("SELECT * FROM atm WHERE email = ?",(email,))
+    acc = cursor.fetchone()
+    if acc:
+        cursor.execute("DELETE FROM atm WHERE email = ?",(email,))
+        print(f"Successfully Deleted Account! 📝\nName: {acc[1]}\nEmail: {acc[0]}\nPassword: {acc[2]}\nBalance: {acc[3]}")
+    else:
+        print("❌ No account found with this email.")
 def debit(email):
     cursor.execute("SELECT * FROM atm WHERE email = ?",(email,))
     acc = cursor.fetchone()
@@ -55,6 +63,7 @@ print("1. 🆕 Create a new account (L for Login)")
 print("2. 🔍 Check account details (C for Check Account)")
 print("3. ➕ Deposit money (credit)")
 print("4. ➖ Withdraw money (debit)")
+print("5. ➖ Delete Account (delete)")
 choice = input("Enter your choice: ").lower()
 email = input("📧 Enter your email: ")
 name = input("👤 Enter your name: ")
@@ -68,5 +77,7 @@ elif choice == "credit":
     credit(email)
 elif choice == "debit":
     debit(email)
+elif choice == "delete":
+    delete_account(email)
 else:
     print("❌ Invalid choice! Please try again.")
